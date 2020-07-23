@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 
-export default function SummaryCard(props) {
+function SummaryCard(props) {
 
     return (
         <Card bg={props.bg} text="white" className="text-center" style={{ margin: "10px" }}>
@@ -17,3 +17,5 @@ export default function SummaryCard(props) {
         </Card>
     )
 }
+
+export default SummaryCard

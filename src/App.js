@@ -9,45 +9,8 @@ import Form from 'react-bootstrap/Form'
 import Columned from 'react-columned';
 import NavBar from './components/NavBar';
 import SummaryCard from './components/SummaryCard'
+import CountryList from './components/CountryList'
 
-
-function CountryCard(data) {
-  return (<Card
-    bg="light"
-    text="dark"
-    className="text-center"
-    style={{ margin: "10px" }}
-  >
-
-    <Card.Img variant="top" src={data.countryInfo.flag} />
-    <Card.Body>
-      <Card.Title>{data.country}</Card.Title>
-      <Card.Text>Cases {data.cases}</Card.Text>
-
-      <Card.Text>Recovered {data.recovered}</Card.Text>
-      <Card.Text>Active {data.active}</Card.Text>
-      <Card.Text>Critical {data.critical}</Card.Text>
-      <Card.Text>Tests {data.tests}</Card.Text>
-      <Card.Text>Today's cases {data.todayCases}</Card.Text>
-      <Card.Text>Today's deaths {data.todayDeaths}</Card.Text>
-      <Card.Text>Population {data.population}</Card.Text>
-    </Card.Body>
-  </Card>)
-}
-
-function CountryList(props) {
-  const countries = props.countries.map((data, i) => {
-    return (
-      <CountryCard
-        key={i}
-        {...data}
-      />
-    );
-  });
-  return (
-    <Columned >{countries}</Columned>
-  )
-}
 
 function App() {
   const [latest, setLatest] = useState([]);
@@ -87,25 +50,27 @@ function App() {
   const lastUpdated = date.toString();
   return (
     <div>
-      <CardDeck>
-        <SummaryCard title="Cases" bg="secondary" lastUpdated={lastUpdated} total={latest.cases} />
-        <SummaryCard title="Deaths" bg="danger" lastUpdated={lastUpdated} total={latest.deaths} />
-        <SummaryCard title="Recovered" bg="success" lastUpdated={lastUpdated} total={latest.recovered} />
-      </CardDeck>
+      <Router>
+        <NavBar />
+        <Route path='/' component={SummaryCard}></Route>
+        <CardDeck>
+          <SummaryCard title="Total Cases" bg="secondary" lastUpdated={lastUpdated} total={latest.cases} />
+          <SummaryCard title="Deaths" bg="danger" lastUpdated={lastUpdated} total={latest.deaths} />
+          <SummaryCard title="Recovered" bg="success" lastUpdated={lastUpdated} total={latest.recovered} />
+        </CardDeck>
 
-      <Form>
-        <Form.Group controlId="formGroupSearch">
-          <Form.Label>Search Country</Form.Label>
-          <Form.Control type="text"
-            placeholder="Enter Country name"
-            onChange={e => setsearchCountries(e.target.value)} />
-        </Form.Group>
-      </Form>
+        <Form>
+          <Form.Group controlId="formGroupSearch">
+            <Form.Label>Search Country</Form.Label>
+            <Form.Control type="text"
+              placeholder="Enter Country name"
+              onChange={e => setsearchCountries(e.target.value)} />
+          </Form.Group>
+        </Form>
 
-      <CountryList countries={filterCountries} />
-
-
-    </div>
+        <CountryList countries={filterCountries} />
+      </Router>
+    </div >
   );
 }
 

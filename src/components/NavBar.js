@@ -1,27 +1,27 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
 
     return (
-        <div style={{ paddingBottom: '15px', marginBottom: '15px' }}>
+        <div >
             <h1 className="header" >COVID-19 World Tracker</h1>
 
-            <NavLink
-                to="/">
-                <button className="nav">Home</button>
+            <NavLink to="/">
+                Home
             </NavLink>
 
             <NavLink
                 to="/new">
-                <button className="nav">Create a New Collection</button>
-            </NavLink>
-            <NavLink
-                to="/countries">
-                <button className="nav">View all data for selected Country</button>
+                Create a New Collection
             </NavLink>
 
-        </div>
+            <NavLink
+                to="/countries">
+                View all data for selected Country
+            </NavLink>
+
+        </div >
     );
 }
 
